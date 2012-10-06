@@ -1,22 +1,19 @@
 package dayz.common;
 
 import java.util.Random;
-import java.util.Set;
 
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.SoundManager;
-import net.minecraft.src.StringUtils;
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.event.ForgeSubscribe;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 
 public class Util
 {
 	public static final String ID = "Day Z Minecraft";
 	public static final String NAME = "Day Z Minecraft";
-	public static final String VERSION = "5.3";	
+	public static final String VERSION = "5.4";	
 	
 	@ForgeSubscribe
 	public void onSoundsLoaded(SoundLoadEvent event)
