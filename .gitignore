@@ -1,6 +1,22 @@
-*.class
+/bin/*
+/conf/*
+/docs/*
+/eclipse/*
+/forge/*
+/jars/*
+/lib/*
+/logs/*
+/modsrc/*
+/reobf/*
+/runtime/*
+/temp/*
 
-# Package Files #
-*.jar
-*.war
-*.ear
+/src/minecraft/*
+/src/minecraft_server/*
+/src/common/*
+!/src/common/dayz/
+
+*.bat
+*.sh
+*.DS_Store
+*.gitignore
