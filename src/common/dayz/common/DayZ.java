@@ -2,7 +2,6 @@ package dayz.common;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
 import net.minecraft.src.CreativeTabs;
@@ -11,7 +10,6 @@ import net.minecraft.src.EnumToolMaterial;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
-import net.minecraft.src.ModLoader;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
@@ -22,7 +20,6 @@ import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PostInit;
 import cpw.mods.fml.common.Mod.PreInit;
-import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -61,19 +58,19 @@ import dayz.common.items.WeaponMelee;
 import dayz.common.world.BiomeGenForest;
 import dayz.common.world.WorldTypeDayZ;
 
-@NetworkMod(clientSideRequired = true, serverSideRequired = false, versionBounds = "5.3")
+@NetworkMod(clientSideRequired = true, serverSideRequired = false, versionBounds = Util.VERSION)
 @Mod(modid = Util.ID, name = Util.NAME, version = Util.VERSION)
 public class DayZ
 {	
     /****************************** 						Main 							******************************/
 
-	public static String dayzVersion = Util.VERSION;
     public static Logger logger = Logger.getLogger("Minecraft");
 	public static EnumArmorMaterial CAMO = EnumHelper.addArmorMaterial("camo", 29, new int[] {2, 6, 5, 2}, 9);
     public static WorldTypeDayZ DayZ_WorldType = new WorldTypeDayZ();
     public static final BiomeGenBase dayzforest = (new BiomeGenForest(25));
     public static boolean isUpToDate = true;
-	@Instance(Util.ID)
+	
+    @Instance(Util.ID)
 	public static DayZ INSTANCE;
     
 	@SidedProxy(clientSide = "dayz.common.ClientProxy", serverSide = "dayz.common.CommonProxy")
@@ -210,16 +207,12 @@ public class DayZ
     	GameRegistry.registerBlock(dayzchestrarenospawn);
     	GameRegistry.registerBlock(dayzchestcommonnospawn);
     	GameRegistry.registerBlock(nails);
-    	
-    /************* 						Biomes 							*************/
-    	
-        GameRegistry.addBiome(dayzforest);
-        
+   
     /************* 						Entities 							*************/
         
-        EntityRegistry.registerGlobalEntityID(EntityZombie.class, "Zombie", ModLoader.getUniqueEntityId(), 1, 2);        
-        EntityRegistry.registerGlobalEntityID(EntityBandit.class, "Bandit", ModLoader.getUniqueEntityId(), 1, 2);        
-        EntityRegistry.registerGlobalEntityID(EntityCrawler.class, "Crawler", ModLoader.getUniqueEntityId(), 1, 2);        
+        EntityRegistry.registerGlobalEntityID(EntityZombie.class, "Zombie", EntityRegistry.findGlobalUniqueEntityId(), 1, 2);        
+        EntityRegistry.registerGlobalEntityID(EntityBandit.class, "Bandit", EntityRegistry.findGlobalUniqueEntityId(), 1, 2);        
+        EntityRegistry.registerGlobalEntityID(EntityCrawler.class, "Crawler", EntityRegistry.findGlobalUniqueEntityId(), 1, 2);        
         
         EntityRegistry.registerModEntity(EntityBullet.class, "Bullet", 1, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityGrenade.class, "Grenade", 1, this, 250, 5, true);
@@ -311,7 +304,7 @@ public class DayZ
         //Proxy
         proxy.DayZload();
 
-        DayZLog.info("Day Z " + dayzVersion + " Loaded");
+        DayZLog.info("Day Z " + Util.VERSION + " Loaded");
     }
     
     /****************************** 						PostLoad 							******************************/
@@ -335,7 +328,7 @@ public class DayZ
 			}
 			else
 			{
-		    	logger.info("Day Z " + dayzVersion + " Loaded.");
+		    	logger.info("Day Z " + Util.VERSION + " Loaded.");
 			}
 			
 	    	logger.info("Make sure your server.properties has the line: level-type=DAYZ to create a Day Z world.");

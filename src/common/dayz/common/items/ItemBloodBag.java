@@ -1,15 +1,10 @@
 package dayz.common.items;
 
-import dayz.common.DayZ;
-import dayz.common.entities.EntityBullet;
-import dayz.common.entities.EntityZombie;
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumAction;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
-import net.minecraft.src.ModLoader;
-import net.minecraft.src.World;
 
 public class ItemBloodBag extends Item
 {
@@ -35,16 +30,6 @@ public class ItemBloodBag extends Item
 
         return true;    
     }
-    
-    /*    
-    @Override
-    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
-    {
-    	itemstack.stackSize--;
-        entityplayer.heal(20);
-        return itemstack;
-    }
-	*/
 	
     @Override
     public String getTextureFile()

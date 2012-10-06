@@ -1,16 +1,9 @@
 package dayz.common;
 
-import java.io.File;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.src.ModLoader;
 import net.minecraft.src.ModelBiped;
 import net.minecraft.src.ModelZombie;
 import net.minecraft.src.RenderBiped;
-import net.minecraft.src.SoundManager;
 import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.client.event.sound.SoundLoadEvent;
-import net.minecraftforge.event.ForgeSubscribe;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.registry.TickRegistry;

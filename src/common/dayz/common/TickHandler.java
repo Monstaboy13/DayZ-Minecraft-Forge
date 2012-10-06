@@ -1,24 +1,20 @@
 package dayz.common;
 
 import java.util.EnumSet;
-
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.GuiMainMenu;
 import net.minecraft.src.GuiScreen;
-import net.minecraft.src.ModLoader;
 import net.minecraft.src.ScaledResolution;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
-import cpw.mods.fml.common.asm.transformers.MCPMerger;
 import dayz.common.entities.EntityCrawler;
 import dayz.common.entities.EntityZombie;
 
-public class TickHandler implements ITickHandler {
-	public static int totalKills = 0;
-
+public class TickHandler implements ITickHandler 
+{
 	@Override
-	public void tickStart(EnumSet<TickType> type, Object... tickData) {
+	public void tickStart(EnumSet<TickType> type, Object... tickData) 
+	{
 
 	}
 
@@ -43,18 +39,20 @@ public class TickHandler implements ITickHandler {
 	}
 
 	@Override
-	public EnumSet<TickType> ticks() {
+	public EnumSet<TickType> ticks() 
+	{
 		return EnumSet.of(TickType.RENDER, TickType.CLIENT);
 	}
 
 	@Override
-	public String getLabel() {
+	public String getLabel() 
+	{
 		return null;
 	}
 
 	public void onRenderTick()
     {
-    	Minecraft mc = ModLoader.getMinecraftInstance();
+    	Minecraft mc = Minecraft.getMinecraft();
     	ScaledResolution scaledresolution = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
         int i = scaledresolution.getScaledWidth();
         int j = scaledresolution.getScaledHeight();
@@ -70,7 +68,7 @@ public class TickHandler implements ITickHandler {
 	            }
 	            FMLClientHandler.instance().getClient().fontRenderer.drawString("Blood: " + (mc.thePlayer.getHealth() * 600), i - 110, 28, 0xffffff);
 	            FMLClientHandler.instance().getClient().fontRenderer.drawString("Zombies: " + zombies, i - 110, 38, 0xffffff);
-	            FMLClientHandler.instance().getClient().fontRenderer.drawString("Version: " + DayZ.dayzVersion, i - 110, 48, 0xffffff);
+	            FMLClientHandler.instance().getClient().fontRenderer.drawString("Version: " + Util.VERSION, i - 110, 48, 0xffffff);
 	            if (DayZ.showCoords == true)
 	            {
 		            FMLClientHandler.instance().getClient().fontRenderer.drawString("Coords: " + (int)mc.thePlayer.posX + ", " + (int)mc.thePlayer.posZ, i - 110, 58, 0xffffff);
@@ -90,11 +88,13 @@ public class TickHandler implements ITickHandler {
     	}
     }
 
-	public void onTickInGUI(GuiScreen guiscreen) {
+	public void onTickInGUI(GuiScreen guiscreen) 
+	{
 
 	}
 
-	public void onTickInGame() {
+	public void onTickInGame() 
+	{
 
 	}
 }
