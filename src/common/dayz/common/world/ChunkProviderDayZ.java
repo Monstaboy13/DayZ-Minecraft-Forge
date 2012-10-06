@@ -2,19 +2,11 @@ package dayz.common.world;
 
 import java.util.List;
 import java.util.Random;
-
-import com.google.common.collect.ObjectArrays;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-
-import dayz.common.DayZ;
-
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
 import net.minecraft.src.BlockSand;
 import net.minecraft.src.Chunk;
 import net.minecraft.src.ChunkPosition;
-import net.minecraft.src.ChunkProviderGenerate;
 import net.minecraft.src.EnumCreatureType;
 import net.minecraft.src.IChunkProvider;
 import net.minecraft.src.IProgressUpdate;
@@ -32,9 +24,9 @@ import net.minecraft.src.World;
 import net.minecraft.src.WorldGenDungeons;
 import net.minecraft.src.WorldGenLakes;
 
-public class ChunkProviderDayZ extends ChunkProviderGenerate implements IChunkProvider
+public class ChunkProviderDayZ implements IChunkProvider
 {
-	/** RNG. */
+    /** RNG. */
     private Random rand;
 
     /** A NoiseGeneratorOctaves used in generating terrain */
@@ -69,14 +61,11 @@ public class ChunkProviderDayZ extends ChunkProviderGenerate implements IChunkPr
     /** Holds Village Generator */
     private MapGenVillage villageGenerator = new MapGenVillage(0);
 
-    private MapGenScatteredFeature scatteredFeatureGenerator = new MapGenScatteredFeature();
-
     /** Holds ravine generator */
     private MapGenBase ravineGenerator = new MapGenRavine();
 
     /** The biomes that are used to generate the chunk */
-    private BiomeGenBase[] biomesForGeneration = new BiomeGenBase[] {DayZ.dayzforest, BiomeGenBase.desert};
-;
+    private BiomeGenBase[] biomesForGeneration;
 
     /** A double array that hold terrain noise from noiseGen3 */
     double[] noise3;
@@ -101,7 +90,6 @@ public class ChunkProviderDayZ extends ChunkProviderGenerate implements IChunkPr
 
     public ChunkProviderDayZ(World par1World, long par2, boolean par4)
     {
-    	super(par1World, par2, par4);
         this.worldObj = par1World;
         this.mapFeaturesEnabled = par4;
         this.rand = new Random(par2);
@@ -308,7 +296,6 @@ public class ChunkProviderDayZ extends ChunkProviderGenerate implements IChunkPr
         if (this.mapFeaturesEnabled)
         {
             this.villageGenerator.generate(this, this.worldObj, par1, par2, var3);
-            this.scatteredFeatureGenerator.generate(this, this.worldObj, par1, par2, var3);
         }
 
         Chunk var4 = new Chunk(this.worldObj, var3, par1, par2);
@@ -500,7 +487,6 @@ public class ChunkProviderDayZ extends ChunkProviderGenerate implements IChunkPr
         if (this.mapFeaturesEnabled)
         {
             var11 = this.villageGenerator.generateStructuresInChunk(this.worldObj, this.rand, par2, par3);
-            this.scatteredFeatureGenerator.generateStructuresInChunk(this.worldObj, this.rand, par2, par3);
         }
 
         int var12;
