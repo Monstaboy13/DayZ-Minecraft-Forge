@@ -46,10 +46,6 @@ public class ItemWhiskeybottleFull extends ItemDayzDrink
     			ThirstUtils.getUtilsFor(par3EntityPlayer.username).getStats().addStats(thirstReplenish, saturationModifier);
     		}
     	}
-		else
-		{
-	    	par3EntityPlayer.getFoodStats().addStats(this);
-		}
         par2World.playSoundAtEntity(par3EntityPlayer, "random.burp", 0.5F, par2World.rand.nextFloat() * 0.1F + 0.9F);
         par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 30 * 20, 6));
         par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.id, 30 * 20, 6));

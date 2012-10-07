@@ -43,19 +43,15 @@ public class ItemWaterbottleFull extends ItemDayzDrink
     			ThirstUtils.getUtilsFor(par3EntityPlayer.username).getStats().addStats(thirstReplenish, saturationModifier);
     		}
     	}
-		else
-		{
-	    	par3EntityPlayer.getFoodStats().addStats(this);
-		}
         par2World.playSoundAtEntity(par3EntityPlayer, "random.burp", 0.5F, par2World.rand.nextFloat() * 0.1F + 0.9F);
 
         if (par1ItemStack.stackSize <= 0)
         {
-            return new ItemStack(DayZ.whiskeybottleempty);
+            return new ItemStack(DayZ.waterbottleempty);
         }
         else
         {
-            par3EntityPlayer.inventory.addItemStackToInventory(new ItemStack(DayZ.whiskeybottleempty));
+            par3EntityPlayer.inventory.addItemStackToInventory(new ItemStack(DayZ.waterbottleempty));
         }
 
         return par1ItemStack;

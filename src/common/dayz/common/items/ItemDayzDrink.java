@@ -39,11 +39,6 @@ public class ItemDayzDrink extends ItemFood
     			ThirstUtils.getUtilsFor(par3EntityPlayer.username).getStats().addStats(thirstReplenish, saturationModifier);
     		}
     	}
-		else
-		{
-	    	par3EntityPlayer.getFoodStats().addStats(this);
-	        par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 30 * 20, 0));
-		}
     	par1ItemStack.stackSize--;
         par2World.playSoundAtEntity(par3EntityPlayer, "random.burp", 0.5F, par2World.rand.nextFloat() * 0.1F + 0.9F);
         return par1ItemStack;
@@ -53,11 +48,6 @@ public class ItemDayzDrink extends ItemFood
     public EnumAction getItemUseAction(ItemStack par1ItemStack)
     {
         return EnumAction.drink;
-    }
-
-    public int getDrinkEffect()
-    {
-        return Potion.moveSpeed.id;
     }
 
     public int getMaxItemUseDuration(ItemStack par1ItemStack)

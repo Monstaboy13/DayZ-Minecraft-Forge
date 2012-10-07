@@ -10,6 +10,7 @@ import net.minecraft.src.EnumToolMaterial;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
@@ -66,7 +67,7 @@ public class DayZ
 
     public static Logger logger = Logger.getLogger("Minecraft");
 	public static EnumArmorMaterial CAMO = EnumHelper.addArmorMaterial("camo", 29, new int[] {2, 6, 5, 2}, 9);
-    public static WorldTypeDayZ DayZ_WorldType = new WorldTypeDayZ();
+	public static WorldTypeDayZ DayZ_WorldType = new WorldTypeDayZ();
     public static final BiomeGenBase dayzforest = (new BiomeGenForest(25));
     public static boolean isUpToDate = true;
 	
@@ -76,6 +77,24 @@ public class DayZ
 	@SidedProxy(clientSide = "dayz.common.ClientProxy", serverSide = "dayz.common.CommonProxy")
 	public static CommonProxy proxy; //This object will be populated with the class that you choose for the environment
    
+    
+	/****************************** 						Config 							******************************/
+	
+	public static int barbedwireID;
+	public static int dayzchestallID;
+	public static int dayzchestrareID;
+	public static int dayzchestcommonID;
+	public static int chainlinkfenceID;
+	public static int sandbagblockID;
+	public static int dayzchestallnospawnID;
+	public static int dayzchestrarenospawnID;
+	public static int dayzchestcommonnospawnID;
+	public static int nailsID;
+	public static boolean showDebug;
+	public static boolean showName;
+	public static boolean showCoords;
+	public static boolean checkUpdate;
+	
     /****************************** 						Items 							******************************/
     
     public static final Item cannedspag = new ItemDayzFood(3000, 4, 1, false).setIconCoord(2, 0).setItemName("cannedspag").setTabToDisplayOn(CreativeTabs.tabFood);
@@ -84,7 +103,7 @@ public class DayZ
     public static final Item waterbottlefull = new ItemWaterbottleFull(3003, 8, 1.0F).setIconCoord(5, 0).setItemName("waterbottlefull").setTabToDisplayOn(CreativeTabs.tabFood);
     public static final Item waterbottleempty = new ItemEmptyBottle(3004, Block.waterMoving.blockID, true).setIconCoord(8, 0).setItemName("waterbottleempty").setTabToDisplayOn(CreativeTabs.tabFood);
     public static final Item whiskeybottleempty = new ItemEmptyBottle(3005, Block.waterMoving.blockID, false).setIconCoord(6, 0).setItemName("whiskeybottleempty").setTabToDisplayOn(CreativeTabs.tabFood);
-    public static final Item whiskeybottlefull = new ItemWhiskeybottleFull(3006, 8, 1.0F).setIconCoord(7, 0).setItemName("whiskeybottlefull").setTabToDisplayOn(CreativeTabs.tabFood);
+    public static final Item whiskeybottlefull = new ItemWhiskeybottleFull(3006, 4, 1.0F).setIconCoord(7, 0).setItemName("whiskeybottlefull").setTabToDisplayOn(CreativeTabs.tabFood);
     public static final Item bandage = new ItemDayzHeal(3007, 10, false).setIconCoord(1, 0).setItemName("bandage").setTabToDisplayOn(CreativeTabs.tabCombat);
     public static final Item antibiotics = new ItemDayzHeal(3008, 0, true).setIconCoord(0, 0).setItemName("antibiotics").setTabToDisplayOn(CreativeTabs.tabCombat);
     public static final Item lemonade = new ItemDayzDrink(3009, 4, 1.0F).setIconCoord(4, 0).setItemName("lemonade").setTabToDisplayOn(CreativeTabs.tabFood);
@@ -108,36 +127,6 @@ public class DayZ
     public static final Item bloodbag = new ItemBloodBag(3027).setIconCoord(2, 0).setItemName("bloodbag").setTabToDisplayOn(CreativeTabs.tabCombat);
     public static final Item waterbottledirty = new ItemWaterbottleDirty(3028, 0, 2, false).setIconCoord(9, 0).setItemName("waterbottledirty").setTabToDisplayOn(CreativeTabs.tabFood);
     public static final Item matches = (new ItemFirestarter(3029, 8)).setIconCoord(2, 0).setItemName("matches");
-    
-    /****************************** 						Blocks						******************************/
-   
-    public static final Block barbedwire = new BlockBarbedWire(160, 0).setBlockName("barbedwire").setHardness(3F).setResistance(2F).setCreativeTab(CreativeTabs.tabDeco);
-    public static final Block dayzchestall = new BlockChestAll(161, true).setBlockName("dayzchestall").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDeco);
-    public static final Block dayzchestrare = new BlockChestRare(162, true).setBlockName("dayzchestrare").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDeco);
-    public static final Block dayzchestcommon = new BlockChestCommon(163, true).setBlockName("dayzchestcommon").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDeco);
-    public static final Block chainlinkfence = (new BlockFence(164, 1, 1, Material.iron, false)).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundMetalFootstep).setBlockName("chainlinkfence").setCreativeTab(CreativeTabs.tabDeco);
-    public static final Block sandbagblock = (new BlockBase(165, 2, Material.clay)).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundGrassFootstep).setBlockName("sandbagblock").setCreativeTab(CreativeTabs.tabDeco);
-    public static final Block dayzchestallnospawn = new BlockChestAll(166, false).setBlockName("dayzchestallnospawn").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDeco);
-    public static final Block dayzchestrarenospawn = new BlockChestRare(167, false).setBlockName("dayzchestrarenospawn").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDeco);
-    public static final Block dayzchestcommonnospawn = new BlockChestCommon(168, false).setBlockName("dayzchestcommonnospawn").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDeco);
-    public static final Block nails = new BlockNails(170, 3, Material.leaves).setBlockName("nails").setHardness(1F).setResistance(1F).setCreativeTab(CreativeTabs.tabDeco);
-	    
-    /****************************** 						Config 							******************************/
-    
-    public static int barbedwireID;
-    public static int dayzchestallID;
-    public static int dayzchestrareID;
-    public static int dayzchestcommonID;
-    public static int chainlinkfenceID;
-    public static int sandbagblockID;
-    public static int dayzchestallnospawnID;
-    public static int dayzchestrarenospawnID;
-    public static int dayzchestcommonnospawnID;
-    public static int nailsID;
-    public static boolean showDebug;
-    public static boolean showName;
-    public static boolean showCoords;
-    public static boolean checkUpdate;
      
     /****************************** 						Preload 							*******************************/
 
@@ -154,7 +143,6 @@ public class DayZ
 			showName = Boolean.parseBoolean(config.getOrCreateBooleanProperty("Show Name on Debug Screen", Configuration.CATEGORY_GENERAL, true).value);
 			showCoords = Boolean.parseBoolean(config.getOrCreateBooleanProperty("Show Coords on Debug Screen", Configuration.CATEGORY_GENERAL, true).value);
 			checkUpdate = Boolean.parseBoolean(config.getOrCreateBooleanProperty("Check for update", Configuration.CATEGORY_GENERAL, true).value);
-
 			
 			barbedwireID = config.getOrCreateBlockIdProperty("barbedwireID", 160).getInt();
 			dayzchestallID = config.getOrCreateBlockIdProperty("dayzchestallID", 161).getInt();
@@ -197,6 +185,17 @@ public class DayZ
     	    	
     /************* 						Blocks 							*************/
     	
+        barbedwire = new BlockBarbedWire(barbedwireID, 0).setBlockName("barbedwire").setHardness(3F).setResistance(2F).setCreativeTab(CreativeTabs.tabDeco);
+        dayzchestall = new BlockChestAll(dayzchestallID, true).setBlockName("dayzchestall").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDeco);
+        dayzchestrare = new BlockChestRare(dayzchestrareID, true).setBlockName("dayzchestrare").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDeco);
+        dayzchestcommon = new BlockChestCommon(dayzchestcommonID, true).setBlockName("dayzchestcommon").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDeco);
+        chainlinkfence = (new BlockFence(chainlinkfenceID, 1, 1, Material.iron, false)).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundMetalFootstep).setBlockName("chainlinkfence").setCreativeTab(CreativeTabs.tabDeco);
+        sandbagblock = (new BlockBase(sandbagblockID, 2, Material.clay)).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundGrassFootstep).setBlockName("sandbagblock").setCreativeTab(CreativeTabs.tabDeco);
+        dayzchestallnospawn = new BlockChestAll(dayzchestallnospawnID, false).setBlockName("dayzchestallnospawn").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDeco);
+        dayzchestrarenospawn = new BlockChestRare(dayzchestrarenospawnID, false).setBlockName("dayzchestrarenospawn").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDeco);
+        dayzchestcommonnospawn = new BlockChestCommon(dayzchestcommonnospawnID, false).setBlockName("dayzchestcommonnospawn").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDeco);
+        nails = new BlockNails(nailsID, 3, Material.leaves).setBlockName("nails").setHardness(1F).setResistance(1F).setCreativeTab(CreativeTabs.tabDeco);
+        
     	GameRegistry.registerBlock(barbedwire);
     	GameRegistry.registerBlock(dayzchestall);
     	GameRegistry.registerBlock(dayzchestrare);
@@ -330,10 +329,21 @@ public class DayZ
 			{
 		    	logger.info("Day Z " + Util.VERSION + " Loaded.");
 			}
-			
 	    	logger.info("Make sure your server.properties has the line: level-type=DAYZ to create a Day Z world.");
-		}
-
+		}	
 	}
+	
+    /****************************** 						Blocks						******************************/
+	   
+    public static Block barbedwire;
+    public static Block dayzchestall;
+    public static Block dayzchestrare;
+    public static Block dayzchestcommon;
+    public static Block chainlinkfence;
+    public static Block sandbagblock;
+    public static Block dayzchestallnospawn;
+    public static Block dayzchestrarenospawn;
+    public static Block dayzchestcommonnospawn;
+    public static Block nails;
 
 }
