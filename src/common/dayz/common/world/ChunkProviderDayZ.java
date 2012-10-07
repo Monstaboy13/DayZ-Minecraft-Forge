@@ -500,6 +500,26 @@ public class ChunkProviderDayZ implements IChunkProvider
             var14 = var5 + this.rand.nextInt(16) + 8;
             (new WorldGenLakes(Block.waterStill.blockID)).generate(this.worldObj, this.rand, var12, var13, var14);
         }
+        
+        for (int k = 0; k < 10; k++)
+        {
+            int structuretype = rand.nextInt(2);
+
+            if (structuretype == 1)
+            {
+                int RandPosX = var4 + this.rand.nextInt(5);
+                int RandPosY = this.rand.nextInt(128);
+                int RandPosZ = var5 + this.rand.nextInt(5);
+                (new WorldGenFort()).generate(this.worldObj, this.rand, RandPosX, RandPosY, RandPosZ);
+            }
+            else
+            {
+                int RandPosX = var4 + this.rand.nextInt(5);
+                int RandPosY = this.rand.nextInt(128);
+                int RandPosZ = var5 + this.rand.nextInt(5);
+                (new WorldGenHouse()).generate(this.worldObj, this.rand, RandPosX, RandPosY, RandPosZ);
+            }
+        }
 
         var6.decorate(this.worldObj, this.rand, var4, var5);
         SpawnerAnimals.performWorldGenSpawning(this.worldObj, var6, var4 + 8, var5 + 8, 16, 16, this.rand);
