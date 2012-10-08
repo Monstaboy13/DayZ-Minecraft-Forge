@@ -1,6 +1,5 @@
 package dayz.common.world;
 
-import net.minecraft.src.ChunkProviderGenerate;
 import net.minecraft.src.IChunkProvider;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldChunkManager;
@@ -27,6 +26,6 @@ public class WorldTypeDayZ extends WorldType
     @Override
     public IChunkProvider getChunkGenerator(World world)
     {
-        return new ChunkProviderGenerate(world, world.getSeed(), world.getWorldInfo().isMapFeaturesEnabled());
+        return new ChunkProviderDayZ(world, world.getSeed(), world.getWorldInfo().isMapFeaturesEnabled());
     }
 }

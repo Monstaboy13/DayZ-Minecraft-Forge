@@ -34,10 +34,7 @@ public class ItemDayzDrink extends ItemFood
     {
     	if (Loader.isModLoaded("ThirstMod"))
     	{
-    		if(!par2World.isRemote) 
-    		{
-    			ThirstUtils.getUtilsFor(par3EntityPlayer.username).getStats().addStats(thirstReplenish, saturationModifier);
-    		}
+        	ThirstUtils.getUtilsFor(par3EntityPlayer.username).getStats().addStats(thirstReplenish, saturationModifier);
     	}
     	par1ItemStack.stackSize--;
         par2World.playSoundAtEntity(par3EntityPlayer, "random.burp", 0.5F, par2World.rand.nextFloat() * 0.1F + 0.9F);
