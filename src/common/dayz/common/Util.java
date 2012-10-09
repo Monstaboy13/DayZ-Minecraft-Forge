@@ -13,7 +13,7 @@ public class Util
 {
 	public static final String ID = "Day Z Minecraft";
 	public static final String NAME = "Day Z Minecraft";
-	public static final String VERSION = "5.4";	
+	public static final String VERSION = "5.5";	
 	
 	@ForgeSubscribe
 	public void onSoundsLoaded(SoundLoadEvent event)

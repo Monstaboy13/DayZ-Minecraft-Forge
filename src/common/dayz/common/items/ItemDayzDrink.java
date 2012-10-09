@@ -1,13 +1,11 @@
 package dayz.common.items;
 
-import tarun1998.thirstmod.utils.ThirstUtils;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumAction;
 import net.minecraft.src.ItemFood;
 import net.minecraft.src.ItemStack;
-import net.minecraft.src.Potion;
-import net.minecraft.src.PotionEffect;
 import net.minecraft.src.World;
+import tarun1998.thirstmod.utils.ThirstUtils;
 import cpw.mods.fml.common.Loader;
 
 public class ItemDayzDrink extends ItemFood

@@ -59,7 +59,7 @@ public class ChunkProviderDayZ implements IChunkProvider
     private double[] stoneNoise = new double[256];
 
     /** Holds Village Generator */
-    private MapGenVillage villageGenerator = new MapGenVillage(0);
+    private MapGenVillage villageGenerator = new MapGenTown(1);
 
     /** Holds ravine generator */
     private MapGenBase ravineGenerator = new MapGenRavine();

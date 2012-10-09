@@ -39,7 +39,7 @@ public class BlockChestRare extends BlockContainer
     {
         super(par1, Material.wood);
         this.blockIndexInTexture = 26;
-        this.setCreativeTab(CreativeTabs.tabDeco);
+        this.setCreativeTab(CreativeTabs.tabDecorations);
         this.setTickRandomly(true);
         this.shouldSpawnZombies = spawnZombies;
     }

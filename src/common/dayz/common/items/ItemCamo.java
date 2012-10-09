@@ -38,7 +38,7 @@ public class ItemCamo extends ItemArmor implements IArmorTextureProvider
         this.damageReduceAmount = par2EnumArmorMaterial.getDamageReductionAmount(par4);
         this.setMaxDamage(par2EnumArmorMaterial.getDurability(par4));
         this.maxStackSize = 1;
-        this.setTabToDisplayOn(CreativeTabs.tabCombat);
+        this.setCreativeTab(CreativeTabs.tabCombat);
     }
 
     @Override

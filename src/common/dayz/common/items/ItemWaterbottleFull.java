@@ -1,10 +1,10 @@
 package dayz.common.items;
 
-import tarun1998.thirstmod.utils.ThirstUtils;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumAction;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
+import tarun1998.thirstmod.utils.ThirstUtils;
 import cpw.mods.fml.common.Loader;
 import dayz.common.DayZ;
 

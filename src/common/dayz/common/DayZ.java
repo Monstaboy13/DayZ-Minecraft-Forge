@@ -97,35 +97,35 @@ public class DayZ
 	
     /****************************** 						Items 							******************************/
     
-    public static final Item cannedspag = new ItemDayzFood(3000, 4, 1, false).setIconCoord(2, 0).setItemName("cannedspag").setTabToDisplayOn(CreativeTabs.tabFood);
-    public static final Item cannedbeans = new ItemDayzFood(3001, 4, 1, false).setIconCoord(0, 0).setItemName("cannedbeans").setTabToDisplayOn(CreativeTabs.tabFood);
-    public static final Item cannedfish = new ItemDayzFood(3002, 4, 1, false).setIconCoord(1, 0).setItemName("cannedfish").setTabToDisplayOn(CreativeTabs.tabFood);
-    public static final Item waterbottlefull = new ItemWaterbottleFull(3003, 8, 1.0F).setIconCoord(5, 0).setItemName("waterbottlefull").setTabToDisplayOn(CreativeTabs.tabFood);
-    public static final Item waterbottleempty = new ItemEmptyBottle(3004, Block.waterMoving.blockID, true).setIconCoord(8, 0).setItemName("waterbottleempty").setTabToDisplayOn(CreativeTabs.tabFood);
-    public static final Item whiskeybottleempty = new ItemEmptyBottle(3005, Block.waterMoving.blockID, false).setIconCoord(6, 0).setItemName("whiskeybottleempty").setTabToDisplayOn(CreativeTabs.tabFood);
-    public static final Item whiskeybottlefull = new ItemWhiskeybottleFull(3006, 4, 1.0F).setIconCoord(7, 0).setItemName("whiskeybottlefull").setTabToDisplayOn(CreativeTabs.tabFood);
-    public static final Item bandage = new ItemDayzHeal(3007, 10, false).setIconCoord(1, 0).setItemName("bandage").setTabToDisplayOn(CreativeTabs.tabCombat);
-    public static final Item antibiotics = new ItemDayzHeal(3008, 0, true).setIconCoord(0, 0).setItemName("antibiotics").setTabToDisplayOn(CreativeTabs.tabCombat);
-    public static final Item lemonade = new ItemDayzDrink(3009, 4, 1.0F).setIconCoord(4, 0).setItemName("lemonade").setTabToDisplayOn(CreativeTabs.tabFood);
-    public static final Item ak74u = new ItemAk74u(3010).setIconCoord(0, 0).setItemName("ak74u").setTabToDisplayOn(CreativeTabs.tabCombat);
-    public static final Item ak74uammo = new ItemAmmo(3011).setIconCoord(1, 0).setItemName("ak74uammo").setTabToDisplayOn(CreativeTabs.tabCombat);
-    public static final Item makarov = new ItemMakarov(3012).setIconCoord(2, 0).setItemName("markov").setTabToDisplayOn(CreativeTabs.tabCombat);
-    public static final Item makarovammo = new ItemAmmo(3013).setIconCoord(3, 0).setItemName("markovammo").setTabToDisplayOn(CreativeTabs.tabCombat);
-    public static final Item remington = new ItemRemington(3014).setIconCoord(4, 0).setItemName("remington").setTabToDisplayOn(CreativeTabs.tabCombat);
-    public static final Item remingtonammo = new ItemAmmo(3015).setIconCoord(5, 0).setItemName("remingtonammo").setTabToDisplayOn(CreativeTabs.tabCombat);
-    public static final Item chocolate = new ItemDayzFood(3016, 4, 0.5F, false).setIconCoord(3, 0).setItemName("chocolate").setTabToDisplayOn(CreativeTabs.tabFood);
+    public static final Item cannedspag = new ItemDayzFood(3000, 4, 1, false).setIconCoord(2, 0).setItemName("cannedspag").setCreativeTab(CreativeTabs.tabFood);
+    public static final Item cannedbeans = new ItemDayzFood(3001, 4, 1, false).setIconCoord(0, 0).setItemName("cannedbeans").setCreativeTab(CreativeTabs.tabFood);
+    public static final Item cannedfish = new ItemDayzFood(3002, 4, 1, false).setIconCoord(1, 0).setItemName("cannedfish").setCreativeTab(CreativeTabs.tabFood);
+    public static final Item waterbottlefull = new ItemWaterbottleFull(3003, 8, 1.0F).setIconCoord(5, 0).setItemName("waterbottlefull").setCreativeTab(CreativeTabs.tabFood);
+    public static final Item waterbottleempty = new ItemEmptyBottle(3004, Block.waterMoving.blockID, true).setIconCoord(8, 0).setItemName("waterbottleempty").setCreativeTab(CreativeTabs.tabFood);
+    public static final Item whiskeybottleempty = new ItemEmptyBottle(3005, Block.waterMoving.blockID, false).setIconCoord(6, 0).setItemName("whiskeybottleempty").setCreativeTab(CreativeTabs.tabFood);
+    public static final Item whiskeybottlefull = new ItemWhiskeybottleFull(3006, 4, 1.0F).setIconCoord(7, 0).setItemName("whiskeybottlefull").setCreativeTab(CreativeTabs.tabFood);
+    public static final Item bandage = new ItemDayzHeal(3007, 10, false).setIconCoord(1, 0).setItemName("bandage").setCreativeTab(CreativeTabs.tabCombat);
+    public static final Item antibiotics = new ItemDayzHeal(3008, 0, true).setIconCoord(0, 0).setItemName("antibiotics").setCreativeTab(CreativeTabs.tabCombat);
+    public static final Item lemonade = new ItemDayzDrink(3009, 4, 1.0F).setIconCoord(4, 0).setItemName("lemonade").setCreativeTab(CreativeTabs.tabFood);
+    public static final Item ak74u = new ItemAk74u(3010).setIconCoord(0, 0).setItemName("ak74u").setCreativeTab(CreativeTabs.tabCombat);
+    public static final Item ak74uammo = new ItemAmmo(3011).setIconCoord(1, 0).setItemName("ak74uammo").setCreativeTab(CreativeTabs.tabCombat);
+    public static final Item makarov = new ItemMakarov(3012).setIconCoord(2, 0).setItemName("markov").setCreativeTab(CreativeTabs.tabCombat);
+    public static final Item makarovammo = new ItemAmmo(3013).setIconCoord(3, 0).setItemName("markovammo").setCreativeTab(CreativeTabs.tabCombat);
+    public static final Item remington = new ItemRemington(3014).setIconCoord(4, 0).setItemName("remington").setCreativeTab(CreativeTabs.tabCombat);
+    public static final Item remingtonammo = new ItemAmmo(3015).setIconCoord(5, 0).setItemName("remingtonammo").setCreativeTab(CreativeTabs.tabCombat);
+    public static final Item chocolate = new ItemDayzFood(3016, 4, 0.5F, false).setIconCoord(3, 0).setItemName("chocolate").setCreativeTab(CreativeTabs.tabFood);
     //3017 is missing or something?    
     public static final Item camohelmet = (new ItemCamo(3018, CAMO, 5, 0)).setItemName("camohelmet").setIconCoord(0, 0);
     public static final Item camochest = (new ItemCamo(3019, CAMO, 5, 1)).setItemName("camochest").setIconCoord(1, 0);
     public static final Item camolegs = (new ItemCamo(3020, CAMO, 5, 2)).setItemName("camolegs").setIconCoord(2, 0);
     public static final Item camoboots = (new ItemCamo(3021, CAMO, 5, 3)).setItemName("camoboots").setIconCoord(3, 0);
-    public static final Item baseballbat = (new WeaponMelee(3022, EnumToolMaterial.WOOD, 6)).setItemName("baseballbat").setIconCoord(0, 1).setTabToDisplayOn(CreativeTabs.tabCombat);
-    public static final Item baseballbatnailed = (new WeaponMelee(3023, EnumToolMaterial.WOOD, 8)).setItemName("baseballbatnailed").setIconCoord(1, 1).setTabToDisplayOn(CreativeTabs.tabCombat);
-    public static final Item plank = (new WeaponMelee(3024, EnumToolMaterial.WOOD, 7)).setItemName("plank").setIconCoord(2, 1).setTabToDisplayOn(CreativeTabs.tabCombat);
-    public static final Item planknailed = (new WeaponMelee(3025, EnumToolMaterial.WOOD, 8)).setItemName("planknailed").setIconCoord(3, 1).setTabToDisplayOn(CreativeTabs.tabCombat);
-    public static final Item pipe = (new WeaponMelee(3026, EnumToolMaterial.WOOD, 8)).setItemName("pipe").setIconCoord(4, 1).setTabToDisplayOn(CreativeTabs.tabCombat);
-    public static final Item bloodbag = new ItemBloodBag(3027).setIconCoord(2, 0).setItemName("bloodbag").setTabToDisplayOn(CreativeTabs.tabCombat);
-    public static final Item waterbottledirty = new ItemWaterbottleDirty(3028, 0, 2, false).setIconCoord(9, 0).setItemName("waterbottledirty").setTabToDisplayOn(CreativeTabs.tabFood);
+    public static final Item baseballbat = (new WeaponMelee(3022, EnumToolMaterial.WOOD, 6)).setItemName("baseballbat").setIconCoord(0, 1).setCreativeTab(CreativeTabs.tabCombat);
+    public static final Item baseballbatnailed = (new WeaponMelee(3023, EnumToolMaterial.WOOD, 8)).setItemName("baseballbatnailed").setIconCoord(1, 1).setCreativeTab(CreativeTabs.tabCombat);
+    public static final Item plank = (new WeaponMelee(3024, EnumToolMaterial.WOOD, 7)).setItemName("plank").setIconCoord(2, 1).setCreativeTab(CreativeTabs.tabCombat);
+    public static final Item planknailed = (new WeaponMelee(3025, EnumToolMaterial.WOOD, 8)).setItemName("planknailed").setIconCoord(3, 1).setCreativeTab(CreativeTabs.tabCombat);
+    public static final Item pipe = (new WeaponMelee(3026, EnumToolMaterial.WOOD, 8)).setItemName("pipe").setIconCoord(4, 1).setCreativeTab(CreativeTabs.tabCombat);
+    public static final Item bloodbag = new ItemBloodBag(3027).setIconCoord(2, 0).setItemName("bloodbag").setCreativeTab(CreativeTabs.tabCombat);
+    public static final Item waterbottledirty = new ItemWaterbottleDirty(3028, 0, 2, false).setIconCoord(9, 0).setItemName("waterbottledirty").setCreativeTab(CreativeTabs.tabFood);
     public static final Item matches = (new ItemFirestarter(3029, 8)).setIconCoord(2, 0).setItemName("matches");
      
     /****************************** 						Preload 							*******************************/
@@ -185,16 +185,16 @@ public class DayZ
     	    	
     /************* 						Blocks 							*************/
     	
-        barbedwire = new BlockBarbedWire(barbedwireID, 0).setBlockName("barbedwire").setHardness(3F).setResistance(2F).setCreativeTab(CreativeTabs.tabDeco);
-        dayzchestall = new BlockChestAll(dayzchestallID, true).setBlockName("dayzchestall").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDeco);
-        dayzchestrare = new BlockChestRare(dayzchestrareID, true).setBlockName("dayzchestrare").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDeco);
-        dayzchestcommon = new BlockChestCommon(dayzchestcommonID, true).setBlockName("dayzchestcommon").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDeco);
-        chainlinkfence = (new BlockFence(chainlinkfenceID, 1, 1, Material.iron, false)).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundMetalFootstep).setBlockName("chainlinkfence").setCreativeTab(CreativeTabs.tabDeco);
-        sandbagblock = (new BlockBase(sandbagblockID, 2, Material.clay)).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundGrassFootstep).setBlockName("sandbagblock").setCreativeTab(CreativeTabs.tabDeco);
-        dayzchestallnospawn = new BlockChestAll(dayzchestallnospawnID, false).setBlockName("dayzchestallnospawn").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDeco);
-        dayzchestrarenospawn = new BlockChestRare(dayzchestrarenospawnID, false).setBlockName("dayzchestrarenospawn").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDeco);
-        dayzchestcommonnospawn = new BlockChestCommon(dayzchestcommonnospawnID, false).setBlockName("dayzchestcommonnospawn").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDeco);
-        nails = new BlockNails(nailsID, 3, Material.leaves).setBlockName("nails").setHardness(1F).setResistance(1F).setCreativeTab(CreativeTabs.tabDeco);
+        barbedwire = new BlockBarbedWire(barbedwireID, 0).setBlockName("barbedwire").setHardness(3F).setResistance(2F).setCreativeTab(CreativeTabs.tabDecorations);
+        dayzchestall = new BlockChestAll(dayzchestallID, true).setBlockName("dayzchestall").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDecorations);
+        dayzchestrare = new BlockChestRare(dayzchestrareID, true).setBlockName("dayzchestrare").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDecorations);
+        dayzchestcommon = new BlockChestCommon(dayzchestcommonID, true).setBlockName("dayzchestcommon").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDecorations);
+        chainlinkfence = (new BlockFence(chainlinkfenceID, 1, 1, Material.iron, false)).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundMetalFootstep).setBlockName("chainlinkfence").setCreativeTab(CreativeTabs.tabDecorations);
+        sandbagblock = (new BlockBase(sandbagblockID, 2, Material.clay)).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundGrassFootstep).setBlockName("sandbagblock").setCreativeTab(CreativeTabs.tabDecorations);
+        dayzchestallnospawn = new BlockChestAll(dayzchestallnospawnID, false).setBlockName("dayzchestallnospawn").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDecorations);
+        dayzchestrarenospawn = new BlockChestRare(dayzchestrarenospawnID, false).setBlockName("dayzchestrarenospawn").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDecorations);
+        dayzchestcommonnospawn = new BlockChestCommon(dayzchestcommonnospawnID, false).setBlockName("dayzchestcommonnospawn").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDecorations);
+        nails = new BlockNails(nailsID, 3, Material.leaves).setBlockName("nails").setHardness(1F).setResistance(1F).setCreativeTab(CreativeTabs.tabDecorations);
         
     	GameRegistry.registerBlock(barbedwire);
     	GameRegistry.registerBlock(dayzchestall);

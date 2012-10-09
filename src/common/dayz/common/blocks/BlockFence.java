@@ -14,7 +14,7 @@ public class BlockFence extends BlockPane
         super(par1, par2, par3, par4Material, par5);
         this.sideTextureIndex = par3;
         this.canDropItself = par5;
-        this.setCreativeTab(CreativeTabs.tabDeco);
+        this.setCreativeTab(CreativeTabs.tabDecorations);
     }
     
     @Override

@@ -15,7 +15,7 @@ public class ItemFirestarter extends Item
         super(par1);
         this.maxStackSize = 1;
         this.setMaxDamage(numOfUses);
-        this.setTabToDisplayOn(CreativeTabs.tabTools);
+        this.setCreativeTab(CreativeTabs.tabTools);
     }
 
     public boolean tryPlaceIntoWorld(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
