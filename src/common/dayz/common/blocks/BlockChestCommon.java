@@ -28,7 +28,7 @@ import cpw.mods.fml.common.asm.SideOnly;
 import dayz.common.DayZ;
 import dayz.common.DayZLog;
 import dayz.common.Util;
-import dayz.common.entities.EntityZombie;
+import dayz.common.entities.EntityZombieDayZ;
 
 public class BlockChestCommon extends BlockContainer
 {
@@ -517,7 +517,7 @@ public class BlockChestCommon extends BlockContainer
             
             if ((doSpawn == 1) && (shouldSpawnZombies == true))
             {
-            	EntityZombie entityzombie = new EntityZombie(world);
+            	EntityZombieDayZ entityzombie = new EntityZombieDayZ(world);
             	entityzombie.setLocationAndAngles((double)i + 0.5D, (double)j + 1D, (double)k + 0.5D, 0.0F, 0.0F);
             	world.spawnEntityInWorld(entityzombie);
             	DayZLog.info("Zombie Spawned at " + i + ", " + j + ", " + k + ".");

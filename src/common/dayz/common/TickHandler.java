@@ -8,7 +8,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 import dayz.common.entities.EntityCrawler;
-import dayz.common.entities.EntityZombie;
+import dayz.common.entities.EntityZombieDayZ;
 
 public class TickHandler implements ITickHandler 
 {
@@ -61,7 +61,7 @@ public class TickHandler implements ITickHandler
     	{
 	        if (mc.inGameHasFocus && mc.isGuiEnabled())
 	        {
-	            int zombies = (mc.theWorld.countEntities(EntityZombie.class) + (mc.theWorld.countEntities(EntityCrawler.class)));
+	            int zombies = (mc.theWorld.countEntities(EntityZombieDayZ.class) + (mc.theWorld.countEntities(EntityCrawler.class)));
 	            if (DayZ.showName == true)
 	            {
 		            FMLClientHandler.instance().getClient().fontRenderer.drawString("Name: " + mc.thePlayer.username, i - 110, 18, 0xffffff);

@@ -36,7 +36,7 @@ public class EntityCrawler extends EntityAnimal
         tasks.addTask(1, new AIBreakDoors(this));
         tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayerMP.class, moveSpeed, false));
         tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, moveSpeed, false));
-        tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityZombie.class, moveSpeed, true));
+        tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityZombieDayZ.class, moveSpeed, true));
         tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityVillager.class, moveSpeed, true));
         tasks.addTask(5, new EntityAIMoveThroughVillage(this, moveSpeed, false));
         tasks.addTask(6, new EntityAIWander(this, moveSpeed));

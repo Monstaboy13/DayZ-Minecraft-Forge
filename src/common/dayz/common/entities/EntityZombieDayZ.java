@@ -1,6 +1,5 @@
 package dayz.common.entities;
 
-import dayz.common.DayZ;
 import net.minecraft.src.DamageSource;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityAIAttackOnCollide;
@@ -21,11 +20,11 @@ import net.minecraft.src.Potion;
 import net.minecraft.src.PotionEffect;
 import net.minecraft.src.World;
 
-public class EntityZombie extends EntityAnimal
+public class EntityZombieDayZ extends EntityAnimal
 {
     protected int attackStrength = 6;
 
-    public EntityZombie(World par1World)
+    public EntityZombieDayZ(World par1World)
     {
         super(par1World);
         this.texture = getRandomZombieTexture();
@@ -35,7 +34,7 @@ public class EntityZombie extends EntityAnimal
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityPlayerMP.class, moveSpeed, false));
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, moveSpeed, false));
-        this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityZombie.class, moveSpeed, true));
+        this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityZombieDayZ.class, moveSpeed, true));
         this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityVillager.class, moveSpeed, true));
         this.tasks.addTask(5, new EntityAIMoveThroughVillage(this, moveSpeed, false));
         this.tasks.addTask(6, new EntityAIWander(this, moveSpeed));
@@ -218,7 +217,7 @@ public class EntityZombie extends EntityAnimal
         if (!this.worldObj.isRemote)
         {
         	int chanceOfRespawn = 1; //rand.nextInt(2);
-   		 	EntityZombie var2 = new EntityZombie(this.worldObj);
+   		 	EntityZombieDayZ var2 = new EntityZombieDayZ(this.worldObj);
 
             if (entityliving instanceof EntityPlayer)
             {

@@ -7,24 +7,20 @@ import net.minecraft.src.Block;
 import net.minecraft.src.BlockSand;
 import net.minecraft.src.Chunk;
 import net.minecraft.src.ChunkPosition;
+import net.minecraft.src.ChunkProviderGenerate;
 import net.minecraft.src.EnumCreatureType;
 import net.minecraft.src.IChunkProvider;
 import net.minecraft.src.IProgressUpdate;
 import net.minecraft.src.MapGenBase;
-import net.minecraft.src.MapGenCaves;
-import net.minecraft.src.MapGenMineshaft;
 import net.minecraft.src.MapGenRavine;
-import net.minecraft.src.MapGenScatteredFeature;
-import net.minecraft.src.MapGenStronghold;
 import net.minecraft.src.MapGenVillage;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.NoiseGeneratorOctaves;
 import net.minecraft.src.SpawnerAnimals;
 import net.minecraft.src.World;
-import net.minecraft.src.WorldGenDungeons;
 import net.minecraft.src.WorldGenLakes;
 
-public class ChunkProviderDayZ implements IChunkProvider
+public class ChunkProviderDayZ extends ChunkProviderGenerate
 {
     /** RNG. */
     private Random rand;
@@ -59,7 +55,7 @@ public class ChunkProviderDayZ implements IChunkProvider
     private double[] stoneNoise = new double[256];
 
     /** Holds Village Generator */
-    private MapGenVillage villageGenerator = new MapGenTown(1);
+    private MapGenVillage villageGenerator = new MapGenVillage(1);
 
     /** Holds ravine generator */
     private MapGenBase ravineGenerator = new MapGenRavine();
@@ -90,6 +86,7 @@ public class ChunkProviderDayZ implements IChunkProvider
 
     public ChunkProviderDayZ(World par1World, long par2, boolean par4)
     {
+    	super(par1World, par2, par4);
         this.worldObj = par1World;
         this.mapFeaturesEnabled = par4;
         this.rand = new Random(par2);
@@ -492,14 +489,6 @@ public class ChunkProviderDayZ implements IChunkProvider
         int var12;
         int var13;
         int var14;
-
-        if (!var11 && this.rand.nextInt(4) == 0)
-        {
-            var12 = var4 + this.rand.nextInt(16) + 8;
-            var13 = this.rand.nextInt(128);
-            var14 = var5 + this.rand.nextInt(16) + 8;
-            (new WorldGenLakes(Block.waterStill.blockID)).generate(this.worldObj, this.rand, var12, var13, var14);
-        }
         
         for (int k = 0; k < 10; k++)
         {

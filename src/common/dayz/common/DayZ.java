@@ -2,15 +2,23 @@ package dayz.common;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
 import net.minecraft.src.CreativeTabs;
+import net.minecraft.src.EntityCreeper;
+import net.minecraft.src.EntityEnderman;
+import net.minecraft.src.EntitySkeleton;
+import net.minecraft.src.EntitySpider;
+import net.minecraft.src.EntityZombie;
 import net.minecraft.src.EnumArmorMaterial;
+import net.minecraft.src.EnumCreatureType;
 import net.minecraft.src.EnumToolMaterial;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
-import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraft.src.WeightedRandomChestContent;
+import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
@@ -40,7 +48,7 @@ import dayz.common.entities.EntityBandit;
 import dayz.common.entities.EntityBullet;
 import dayz.common.entities.EntityCrawler;
 import dayz.common.entities.EntityGrenade;
-import dayz.common.entities.EntityZombie;
+import dayz.common.entities.EntityZombieDayZ;
 import dayz.common.items.ItemAk74u;
 import dayz.common.items.ItemAmmo;
 import dayz.common.items.ItemBloodBag;
@@ -67,8 +75,10 @@ public class DayZ
 
     public static Logger logger = Logger.getLogger("Minecraft");
 	public static EnumArmorMaterial CAMO = EnumHelper.addArmorMaterial("camo", 29, new int[] {2, 6, 5, 2}, 9);
+    public static final BiomeGenBase dayzForest = (new BiomeGenForest(25));
+    public static final BiomeGenBase dayzPlains = (new BiomeGenForest(26));
+    public static final BiomeGenBase dayzRiver = (new BiomeGenForest(27));
 	public static WorldTypeDayZ DayZ_WorldType = new WorldTypeDayZ();
-    public static final BiomeGenBase dayzforest = (new BiomeGenForest(25));
     public static boolean isUpToDate = true;
 	
     @Instance(Util.ID)
@@ -209,20 +219,26 @@ public class DayZ
    
     /************* 						Entities 							*************/
         
-        EntityRegistry.registerGlobalEntityID(EntityZombie.class, "Zombie", EntityRegistry.findGlobalUniqueEntityId(), 1, 2);        
+        EntityRegistry.registerGlobalEntityID(EntityZombieDayZ.class, "Zombie", EntityRegistry.findGlobalUniqueEntityId(), 1, 2);        
         EntityRegistry.registerGlobalEntityID(EntityBandit.class, "Bandit", EntityRegistry.findGlobalUniqueEntityId(), 1, 2);        
         EntityRegistry.registerGlobalEntityID(EntityCrawler.class, "Crawler", EntityRegistry.findGlobalUniqueEntityId(), 1, 2);        
         
         EntityRegistry.registerModEntity(EntityBullet.class, "Bullet", 1, this, 250, 5, true);
         EntityRegistry.registerModEntity(EntityGrenade.class, "Grenade", 1, this, 250, 5, true);
         
+        EntityRegistry.removeSpawn(EntitySkeleton.class, EnumCreatureType.monster, BiomeGenBase.river);
+        EntityRegistry.removeSpawn(EntityZombie.class, EnumCreatureType.monster, BiomeGenBase.river);
+        EntityRegistry.removeSpawn(EntitySpider.class, EnumCreatureType.monster, BiomeGenBase.river);
+        EntityRegistry.removeSpawn(EntityCreeper.class, EnumCreatureType.monster, BiomeGenBase.river);
+        EntityRegistry.removeSpawn(EntityEnderman.class, EnumCreatureType.monster, BiomeGenBase.river);
+
     /************* 						Names 							*************/
         
         LanguageRegistry.instance().addStringLocalization("entity.Crawler.name", "en_US", "Crawler");
         LanguageRegistry.instance().addStringLocalization("entity.DayZZombie.name", "en_US", "Zombie");
         LanguageRegistry.instance().addStringLocalization("entity.Bandit.name", "en_US", "Bandit");
         LanguageRegistry.instance().addStringLocalization("generator.DAYZ", "en_US", "Day Z");
-        
+
         LanguageRegistry.addName(DayZ.cannedspag, "Can of Spagetti");
         LanguageRegistry.addName(DayZ.cannedbeans, "Can of Beans");
         LanguageRegistry.addName(DayZ.cannedfish, "Can of Sardines");
@@ -297,12 +313,67 @@ public class DayZ
         });
         
         GameRegistry.addSmelting(waterbottledirty.shiftedIndex, new ItemStack(waterbottlefull, 1), 0.2F);
+        
+    /************* 						Generation 							*************/
+
+        Util.setVillageCanSpawnInBiome(dayzPlains, true);
+        Util.setVillageCanSpawnInBiome(dayzForest, true);
+
+        ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(DayZ.makarov.shiftedIndex, 0, 1, 1, 1));
+        ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(DayZ.antibiotics.shiftedIndex, 0, 1, 1, 1));
+        ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(DayZ.makarovammo.shiftedIndex, 0, 1, 1, 1));
+        ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(DayZ.cannedbeans.shiftedIndex, 0, 1, 1, 1));
+        ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(DayZ.cannedspag.shiftedIndex, 0, 1, 1, 1));
+        ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(DayZ.waterbottlefull.shiftedIndex, 0, 1, 1, 1));
+        ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(Item.writableBook.shiftedIndex, 0, 1, 1, 1));
+        ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(Item.boat.shiftedIndex, 0, 1, 1, 1));
+        ChestGenHooks.addItem(ChestGenHooks.BONUS_CHEST, new WeightedRandomChestContent(DayZ.pipe.shiftedIndex, 0, 1, 1, 1));
+
+        ChestGenHooks.removeItem(ChestGenHooks.BONUS_CHEST, new ItemStack(Item.stick));
+        ChestGenHooks.removeItem(ChestGenHooks.BONUS_CHEST, new ItemStack(Block.planks));
+        ChestGenHooks.removeItem(ChestGenHooks.BONUS_CHEST, new ItemStack(Block.wood));
+        ChestGenHooks.removeItem(ChestGenHooks.BONUS_CHEST, new ItemStack(Item.axeStone));
+        ChestGenHooks.removeItem(ChestGenHooks.BONUS_CHEST, new ItemStack(Item.axeWood));
+        ChestGenHooks.removeItem(ChestGenHooks.BONUS_CHEST, new ItemStack(Item.pickaxeStone));
+        ChestGenHooks.removeItem(ChestGenHooks.BONUS_CHEST, new ItemStack(Item.pickaxeWood));
+        ChestGenHooks.removeItem(ChestGenHooks.BONUS_CHEST, new ItemStack(Item.appleRed));
+        ChestGenHooks.removeItem(ChestGenHooks.BONUS_CHEST, new ItemStack(Item.bread));
+                
+        ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(DayZ.makarov.shiftedIndex, 0, 1, 1, 1));
+        ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(DayZ.ak74u.shiftedIndex, 0, 1, 1, 1));
+        ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(DayZ.remington.shiftedIndex, 0, 1, 1, 1));
+        ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(DayZ.makarovammo.shiftedIndex, 0, 1, 1, 2));
+        ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(DayZ.ak74uammo.shiftedIndex, 0, 1, 1, 2));
+        ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(DayZ.remingtonammo.shiftedIndex, 0, 1, 1, 2));
+        ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(DayZ.bandage.shiftedIndex, 0, 1, 1, 3));
+        ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(DayZ.antibiotics.shiftedIndex, 0, 1, 1, 3));
+        ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(DayZ.cannedbeans.shiftedIndex, 0, 1, 1, 4));
+        ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(DayZ.cannedfish.shiftedIndex, 0, 1, 1, 4));
+        ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(DayZ.cannedspag.shiftedIndex, 0, 1, 1, 4));
+        ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(DayZ.waterbottlefull.shiftedIndex, 0, 1, 1, 3));
+        ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(DayZ.waterbottleempty.shiftedIndex, 0, 1, 1, 5));
+        ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(DayZ.whiskeybottlefull.shiftedIndex, 0, 1, 1, 2));
+        ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(DayZ.pipe.shiftedIndex, 0, 1, 1, 3));
+        ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(Item.boat.shiftedIndex, 0, 1, 1, 3));
+
+        ChestGenHooks.removeItem(ChestGenHooks.VILLAGE_BLACKSMITH, new ItemStack(Item.ingotIron));
+        ChestGenHooks.removeItem(ChestGenHooks.VILLAGE_BLACKSMITH, new ItemStack(Item.ingotGold));
+        ChestGenHooks.removeItem(ChestGenHooks.VILLAGE_BLACKSMITH, new ItemStack(Item.diamond));
+        ChestGenHooks.removeItem(ChestGenHooks.VILLAGE_BLACKSMITH, new ItemStack(Item.bread));
+        ChestGenHooks.removeItem(ChestGenHooks.VILLAGE_BLACKSMITH, new ItemStack(Item.appleRed));
+        ChestGenHooks.removeItem(ChestGenHooks.VILLAGE_BLACKSMITH, new ItemStack(Item.pickaxeSteel));
+        ChestGenHooks.removeItem(ChestGenHooks.VILLAGE_BLACKSMITH, new ItemStack(Item.swordSteel));
+        ChestGenHooks.removeItem(ChestGenHooks.VILLAGE_BLACKSMITH, new ItemStack(Item.plateSteel));
+        ChestGenHooks.removeItem(ChestGenHooks.VILLAGE_BLACKSMITH, new ItemStack(Item.helmetSteel));
+        ChestGenHooks.removeItem(ChestGenHooks.VILLAGE_BLACKSMITH, new ItemStack(Item.bootsSteel));
+        ChestGenHooks.removeItem(ChestGenHooks.VILLAGE_BLACKSMITH, new ItemStack(Item.legsSteel));
+        ChestGenHooks.removeItem(ChestGenHooks.VILLAGE_BLACKSMITH, new ItemStack(Block.obsidian));
+        ChestGenHooks.removeItem(ChestGenHooks.VILLAGE_BLACKSMITH, new ItemStack(Block.sapling));
 
     /************* 						Other 							*************/
 
         //Proxy
         proxy.DayZload();
-
         DayZLog.info("Day Z " + Util.VERSION + " Loaded");
     }
     
@@ -329,7 +400,7 @@ public class DayZ
 			{
 		    	logger.info("Day Z " + Util.VERSION + " Loaded.");
 			}
-	    	logger.info("Make sure your server.properties has the line: level-type=DAYZ to create a Day Z world.");
+			logger.info("Make sure your server.properties has the line: level-type=DAYZ to create a Day Z world.");
 		}	
 	}
 	

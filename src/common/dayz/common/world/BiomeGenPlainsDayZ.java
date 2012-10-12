@@ -17,17 +17,17 @@ import dayz.common.entities.EntityBandit;
 import dayz.common.entities.EntityCrawler;
 import dayz.common.entities.EntityZombieDayZ;
 
-public class BiomeGenForest extends BiomeGenBase 
+public class BiomeGenPlainsDayZ extends BiomeGenBase 
 {
-	public BiomeGenForest(int id) 
+	public BiomeGenPlainsDayZ(int id) 
 	{
 		super(id);
 		setColor(747097);
-		setBiomeName("DayZ Forest");
+		setBiomeName("DayZ Plains");
 		temperature = BiomeGenBase.forest.temperature;
 		rainfall = BiomeGenBase.forest.rainfall;
 		minHeight = 0.1F;
-		maxHeight = 0.2F;
+		maxHeight = 0.1F;
         spawnableMonsterList.clear();
         spawnableCreatureList.clear();
         spawnableWaterCreatureList.clear();
@@ -44,13 +44,6 @@ public class BiomeGenForest extends BiomeGenBase
 	@Override
 	protected BiomeDecorator createBiomeDecorator() 
 	{
-		return new BiomeDecoratorOverride.Builder(this).biomeColour(1456435).flowersPerChunk(4).deadBushPerChunk(4).treesPerChunk(7).grassPerChunk(10).build();
+		return new BiomeDecoratorOverride.Builder(this).biomeColour(1456435).flowersPerChunk(4).deadBushPerChunk(4).treesPerChunk(-999).grassPerChunk(20).build();
 	}
-
-    @Override
-    public WorldGenerator getRandomWorldGenForTrees(Random par1Random)
-    {
-        return (WorldGenerator)(par1Random.nextInt(3) == 0 ? new WorldGenTaiga1() : new WorldGenTaiga2(false));
-    }
-
 }
