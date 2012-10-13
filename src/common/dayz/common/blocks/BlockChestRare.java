@@ -22,9 +22,11 @@ import net.minecraft.src.MathHelper;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.TileEntityChest;
+import net.minecraft.src.WeightedRandomChestContent;
 import net.minecraft.src.World;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
+import dayz.common.ChestHookRegistry;
 import dayz.common.DayZ;
 import dayz.common.DayZLog;
 import dayz.common.Util;
@@ -33,15 +35,14 @@ import dayz.common.entities.EntityZombieDayZ;
 public class BlockChestRare extends BlockContainer
 {
     private Random random = new Random();
-    private Boolean shouldSpawnZombies;
+    private int chanceToTick = random.nextInt(DayZ.chanceToRegenChest);
 
-    public BlockChestRare(int par1, boolean spawnZombies)
+    public BlockChestRare(int par1)
     {
         super(par1, Material.wood);
         this.blockIndexInTexture = 26;
         this.setCreativeTab(CreativeTabs.tabDecorations);
         this.setTickRandomly(true);
-        this.shouldSpawnZombies = spawnZombies;
     }
     
     /**
@@ -508,35 +509,38 @@ public class BlockChestRare extends BlockContainer
         TileEntityChest tileentitychest = (TileEntityChest)world.getBlockTileEntity(i, j, k);        
         if (tileentitychest != null)
         {
-            int i1 = world.getBlockId(i, j - 1, k);
-            
-            int doSpawn = random.nextInt(10);
-            int doCreateLoot = random.nextInt(50);
-            int lootType = random.nextInt(4);
-            int amountOfLoot = random.nextInt(5);
-            
-            if ((doSpawn == 1) && (shouldSpawnZombies == true))
-            {
-            	EntityZombieDayZ entityzombie = new EntityZombieDayZ(world);
-            	entityzombie.setLocationAndAngles((double)i + 0.5D, (double)j + 1D, (double)k + 0.5D, 0.0F, 0.0F);
-            	world.spawnEntityInWorld(entityzombie);
-            	DayZLog.info("Zombie Spawned at " + i + ", " + j + ", " + k + ".");
-            }
-            
-            
-            if (doCreateLoot == 1)
-            {
-	            for (int n = 0; n < amountOfLoot; n++)
+        	if (chanceToTick == 0)
+        	{
+	        	boolean continueChecking = true;
+	        	int slotNumber = 0;
+	            while (continueChecking == true)
 	            {
-	            	ItemStack itemstack = Util.LootItemsRare();
-		
-	            	if (itemstack != null)
+	            	if (tileentitychest.getStackInSlot(slotNumber) == null && slotNumber < 27)
 	            	{
-	            		tileentitychest.setInventorySlotContents(random1.nextInt(tileentitychest.getSizeInventory()), itemstack);
-	            		DayZLog.info("Refilled Chest at " + i + ", " + j + ", " + k + ".");
+	                    if(slotNumber == 26)
+	                    {
+	                    	if (world.getClosestPlayer(i, j, k, 32) == null)
+	                        {
+	                    		WeightedRandomChestContent.generateChestContents(random1, ChestHookRegistry.chestRareContents, tileentitychest, random1.nextInt(5) + 1);	
+	    	            		DayZLog.info("Refilled Rare Chest at " + i + ", " + j + ", " + k + ".");
+	                        	continueChecking = false;
+	                        }
+	                    	else
+	                    	{
+	                        	continueChecking = false;
+	                    	}
+	                    }
+	                    else
+	                    {
+	                    	slotNumber++;
+	                    }
+	            	}
+	            	else
+	            	{
+	                    continueChecking = false;
 	            	}
 	            }
-            }
+        	}
         }
     }
 }

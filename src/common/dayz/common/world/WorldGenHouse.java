@@ -5,8 +5,10 @@ import java.util.Random;
 import net.minecraft.src.Block;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.TileEntityChest;
+import net.minecraft.src.WeightedRandomChestContent;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldGenerator;
+import dayz.common.ChestHookRegistry;
 import dayz.common.DayZ;
 import dayz.common.DayZLog;
 import dayz.common.Util;
@@ -178,36 +180,15 @@ public class WorldGenHouse extends WorldGenerator
         world.setBlock(i + 8, j + 1, k + 7, 61);
         world.setBlock(i + 8, j + 1, k + 6, 61);
         
-        int chest = DayZ.dayzchestcommon.blockID;
+        int chest = DayZ.dayzchestall.blockID;
         int lootType = rand.nextInt(4);
         int itemlocation = rand.nextInt(27);
         int numofcontents = rand.nextInt(10);
         
         world.setBlockWithNotify(i + 8, j + 1, k + 5, chest);
-        DayZLog.info("Day Z House Chest Created At " + (i + 8) + ", " + (j + 1) + ", " + (k + 5) + ".");
         TileEntityChest tileentitychest = (TileEntityChest)world.getBlockTileEntity(i + 8, j + 1, k + 5);
-
-        if(numofcontents < 1)
-        {
-        	chestcontents = 5;
-        }
-        else if(numofcontents >= 1 && numofcontents <= 5)
-        {
-        	chestcontents = 3;
-        }
-        else if(numofcontents > 5)
-        {
-        	chestcontents = 1;
-        }
-        for (int n = 0; n < chestcontents; n++)
-        {
-        	ItemStack itemstack = Util.LootItemsCommon();
-
-        	if (itemstack != null)
-        	{
-        		tileentitychest.setInventorySlotContents(rand.nextInt(tileentitychest.getSizeInventory()), itemstack);
-        	}
-        }
+		WeightedRandomChestContent.generateChestContents(rand, ChestHookRegistry.chestCommonContents, tileentitychest, rand.nextInt(5) + 1);	
+        DayZLog.info("Day Z House Chest Created At " + (i + 8) + ", " + (j + 1) + ", " + (k + 5) + ".");
         
         world.setBlock(i + 8, j + 1, k + 4, 58);
         world.setBlock(i + 8, j + 1, k + 3, 0);

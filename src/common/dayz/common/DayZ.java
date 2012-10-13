@@ -85,7 +85,7 @@ public class DayZ
 	public static DayZ INSTANCE;
     
 	@SidedProxy(clientSide = "dayz.common.ClientProxy", serverSide = "dayz.common.CommonProxy")
-	public static CommonProxy proxy; //This object will be populated with the class that you choose for the environment
+	public static CommonProxy proxy;
    
     
 	/****************************** 						Config 							******************************/
@@ -96,14 +96,13 @@ public class DayZ
 	public static int dayzchestcommonID;
 	public static int chainlinkfenceID;
 	public static int sandbagblockID;
-	public static int dayzchestallnospawnID;
-	public static int dayzchestrarenospawnID;
-	public static int dayzchestcommonnospawnID;
 	public static int nailsID;
 	public static boolean showDebug;
 	public static boolean showName;
 	public static boolean showCoords;
 	public static boolean checkUpdate;
+	public static int chanceToRegenChest;
+
 	
     /****************************** 						Items 							******************************/
     
@@ -149,21 +148,20 @@ public class DayZ
 		{
 			config.load();
 			
-			showDebug = Boolean.parseBoolean(config.getOrCreateBooleanProperty("Show Debug Screen", Configuration.CATEGORY_GENERAL, true).value);
-			showName = Boolean.parseBoolean(config.getOrCreateBooleanProperty("Show Name on Debug Screen", Configuration.CATEGORY_GENERAL, true).value);
-			showCoords = Boolean.parseBoolean(config.getOrCreateBooleanProperty("Show Coords on Debug Screen", Configuration.CATEGORY_GENERAL, true).value);
-			checkUpdate = Boolean.parseBoolean(config.getOrCreateBooleanProperty("Check for update", Configuration.CATEGORY_GENERAL, true).value);
-			
-			barbedwireID = config.getOrCreateBlockIdProperty("barbedwireID", 160).getInt();
-			dayzchestallID = config.getOrCreateBlockIdProperty("dayzchestallID", 161).getInt();
-			dayzchestrareID = config.getOrCreateBlockIdProperty("dayzchestrareID", 162).getInt();
-			dayzchestcommonID = config.getOrCreateBlockIdProperty("dayzchestcommonID", 163).getInt();
-			chainlinkfenceID = config.getOrCreateBlockIdProperty("chainlinkfenceID", 164).getInt();
-			sandbagblockID = config.getOrCreateBlockIdProperty("sandbagblockID", 165).getInt();
-			dayzchestallnospawnID = config.getOrCreateBlockIdProperty("dayzchestallnospawnID", 166).getInt();
-			dayzchestrarenospawnID = config.getOrCreateBlockIdProperty("dayzchestrarenospawnID", 167).getInt();
-			dayzchestcommonnospawnID = config.getOrCreateBlockIdProperty("dayzchestcommonnospawnID", 168).getInt();
-			nailsID = config.getOrCreateBlockIdProperty("nailsID", 170).getInt();
+			showDebug = Boolean.parseBoolean(config.get("Show Debug Screen", Configuration.CATEGORY_GENERAL, true).value);
+			showName = Boolean.parseBoolean(config.get("Show Name on Debug Screen", Configuration.CATEGORY_GENERAL, true).value);
+			showCoords = Boolean.parseBoolean(config.get("Show Coords on Debug Screen", Configuration.CATEGORY_GENERAL, true).value);
+			checkUpdate = Boolean.parseBoolean(config.get("Check for update", Configuration.CATEGORY_GENERAL, true).value);
+			chanceToRegenChest = config.get(Configuration.CATEGORY_GENERAL, "Chance to regenerate chest items", 5).getInt();
+
+			barbedwireID = config.getBlock("barbedwireID", 160).getInt();
+			dayzchestallID = config.getBlock("dayzchestallID", 161).getInt();
+			dayzchestrareID = config.getBlock("dayzchestrareID", 162).getInt();
+			dayzchestcommonID = config.getBlock("dayzchestcommonID", 163).getInt();
+			chainlinkfenceID = config.getBlock("chainlinkfenceID", 164).getInt();
+			sandbagblockID = config.getBlock("sandbagblockID", 165).getInt();
+			nailsID = config.getBlock("nailsID", 170).getInt();
+
 		}
 		catch (final Exception e) 
 		{
@@ -196,14 +194,11 @@ public class DayZ
     /************* 						Blocks 							*************/
     	
         barbedwire = new BlockBarbedWire(barbedwireID, 0).setBlockName("barbedwire").setHardness(3F).setResistance(2F).setCreativeTab(CreativeTabs.tabDecorations);
-        dayzchestall = new BlockChestAll(dayzchestallID, true).setBlockName("dayzchestall").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDecorations);
-        dayzchestrare = new BlockChestRare(dayzchestrareID, true).setBlockName("dayzchestrare").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDecorations);
-        dayzchestcommon = new BlockChestCommon(dayzchestcommonID, true).setBlockName("dayzchestcommon").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDecorations);
+        dayzchestall = new BlockChestAll(dayzchestallID).setBlockName("dayzchestall").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDecorations);
+        dayzchestrare = new BlockChestRare(dayzchestrareID).setBlockName("dayzchestrare").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDecorations);
+        dayzchestcommon = new BlockChestCommon(dayzchestcommonID).setBlockName("dayzchestcommon").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDecorations);
         chainlinkfence = (new BlockFence(chainlinkfenceID, 1, 1, Material.iron, false)).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundMetalFootstep).setBlockName("chainlinkfence").setCreativeTab(CreativeTabs.tabDecorations);
         sandbagblock = (new BlockBase(sandbagblockID, 2, Material.clay)).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundGrassFootstep).setBlockName("sandbagblock").setCreativeTab(CreativeTabs.tabDecorations);
-        dayzchestallnospawn = new BlockChestAll(dayzchestallnospawnID, false).setBlockName("dayzchestallnospawn").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDecorations);
-        dayzchestrarenospawn = new BlockChestRare(dayzchestrarenospawnID, false).setBlockName("dayzchestrarenospawn").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDecorations);
-        dayzchestcommonnospawn = new BlockChestCommon(dayzchestcommonnospawnID, false).setBlockName("dayzchestcommonnospawn").setBlockUnbreakable().setCreativeTab(CreativeTabs.tabDecorations);
         nails = new BlockNails(nailsID, 3, Material.leaves).setBlockName("nails").setHardness(1F).setResistance(1F).setCreativeTab(CreativeTabs.tabDecorations);
         
     	GameRegistry.registerBlock(barbedwire);
@@ -212,9 +207,6 @@ public class DayZ
     	GameRegistry.registerBlock(dayzchestcommon);
     	GameRegistry.registerBlock(chainlinkfence);
     	GameRegistry.registerBlock(sandbagblock);
-    	GameRegistry.registerBlock(dayzchestallnospawn);
-    	GameRegistry.registerBlock(dayzchestrarenospawn);
-    	GameRegistry.registerBlock(dayzchestcommonnospawn);
     	GameRegistry.registerBlock(nails);
    
     /************* 						Entities 							*************/
@@ -263,12 +255,9 @@ public class DayZ
         LanguageRegistry.addName(DayZ.barbedwire, "Barbed Wire");
         LanguageRegistry.addName(DayZ.sandbagblock, "Sandbag Block");
         LanguageRegistry.addName(DayZ.chainlinkfence, "Chain-link Fence");
-        LanguageRegistry.addName(DayZ.dayzchestall, "Day Z Chest with Spawner");
-        LanguageRegistry.addName(DayZ.dayzchestrare, "Day Z Rare Chest with Spawner");
-        LanguageRegistry.addName(DayZ.dayzchestcommon, "Day Z Common Chest with Spawner");
-        LanguageRegistry.addName(DayZ.dayzchestallnospawn, "Day Z Chest");
-        LanguageRegistry.addName(DayZ.dayzchestrarenospawn, "Day Z Rare Chest");
-        LanguageRegistry.addName(DayZ.dayzchestcommonnospawn, "Day Z Common Chest");
+        LanguageRegistry.addName(DayZ.dayzchestall, "Day Z Chest");
+        LanguageRegistry.addName(DayZ.dayzchestrare, "Day Z Rare Chest");
+        LanguageRegistry.addName(DayZ.dayzchestcommon, "Day Z Common Chest");
         LanguageRegistry.addName(DayZ.baseballbat, "Baseball Bat");
         LanguageRegistry.addName(DayZ.baseballbatnailed, "Nailed Baseball Bat");
         LanguageRegistry.addName(DayZ.plank, "Plank");
@@ -412,9 +401,6 @@ public class DayZ
     public static Block dayzchestcommon;
     public static Block chainlinkfence;
     public static Block sandbagblock;
-    public static Block dayzchestallnospawn;
-    public static Block dayzchestrarenospawn;
-    public static Block dayzchestcommonnospawn;
     public static Block nails;
 
 }

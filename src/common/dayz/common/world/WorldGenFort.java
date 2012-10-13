@@ -1,27 +1,30 @@
 package dayz.common.world;
 
+import static net.minecraftforge.common.ChestGenHooks.PYRAMID_DESERT_CHEST;
+
 import java.util.Random;
 
 import net.minecraft.src.Block;
 import net.minecraft.src.ItemStack;
+import net.minecraft.src.StructureComponent;
 import net.minecraft.src.TileEntityChest;
+import net.minecraft.src.WeightedRandomChestContent;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldGenerator;
+import net.minecraftforge.common.ChestGenHooks;
+import dayz.common.ChestHookRegistry;
 import dayz.common.DayZ;
 import dayz.common.DayZLog;
 import dayz.common.Util;
 
 public class WorldGenFort extends WorldGenerator
 {
-    public WorldGenFort()
-    {
-    	
-    }
+    public WorldGenFort() {}
     
     private Random rand;
     public int chestcontents;
     int randomstonebrick = 0;
-    
+
     public boolean generate(World world, Random rand, int i, int j, int k)
     {
         int bID = 2;
@@ -366,49 +369,12 @@ public class WorldGenFort extends WorldGenerator
         world.setBlock(i + 4, j + 11, k + 1, 0);
         world.setBlockAndMetadataWithNotify(i + 4, j + 11, k + 0, 98, randomstonebrick);
         
-        int chest = DayZ.dayzchestrare.blockID;
-        int lootType = rand.nextInt(4);
-        int itemlocation = rand.nextInt(27);
-        int numofcontents = rand.nextInt(10);
-        
+        int chest = DayZ.dayzchestall.blockID;
         world.setBlockWithNotify(i + 5, j + 11, k + 5, chest);
         TileEntityChest tileentitychest = (TileEntityChest)world.getBlockTileEntity(i + 5, j + 11, k + 5);
+		WeightedRandomChestContent.generateChestContents(rand, ChestHookRegistry.chestRareContents, tileentitychest, rand.nextInt(5) + 1);	
         DayZLog.info("Day Z Fort Chest Created At " + (i + 5) + ", " + (j + 11) + ", " + (k + 5) + ".");
 
-        
-        if(numofcontents < 1)
-        {
-        	chestcontents = 5;
-        }
-        else if(numofcontents >= 1 && numofcontents <= 5)
-        {
-        	chestcontents = 3;
-        }
-        else if(numofcontents > 5)
-        {
-        	chestcontents = 1;
-        }
-        for (int n = 0; n < chestcontents; n++)
-        {
-            if (lootType == 1)
-            {
-                ItemStack itemstack = Util.LootItemsRare();
-
-                if (itemstack != null)
-                {
-                	tileentitychest.setInventorySlotContents(rand.nextInt(tileentitychest.getSizeInventory()), itemstack);
-                }
-            }
-            else
-            {
-                ItemStack itemstack = Util.LootItemsCommon();
-
-                if (itemstack != null)
-                {
-                	tileentitychest.setInventorySlotContents(rand.nextInt(tileentitychest.getSizeInventory()), itemstack);
-                }
-            }
-        }
         world.setBlock(i + 5, j + 11, k + 4, 0);
         world.setBlock(i + 5, j + 11, k + 3, 0);
         world.setBlock(i + 5, j + 11, k + 2, 0);

@@ -11,6 +11,7 @@ import net.minecraft.src.EntityAISwimming;
 import net.minecraft.src.EntityAIWander;
 import net.minecraft.src.EntityAIWatchClosest;
 import net.minecraft.src.EntityAnimal;
+import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EntityPlayerMP;
 import net.minecraft.src.EntityVillager;
@@ -18,6 +19,7 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.Potion;
+import net.minecraft.src.PotionEffect;
 import net.minecraft.src.World;
 
 public class EntityBandit extends EntityAnimal
@@ -137,19 +139,31 @@ public class EntityBandit extends EntityAnimal
     @Override
     public boolean attackEntityAsMob(Entity par1Entity)
     {
-        int i = 4;
-
-        if (isPotionActive(Potion.damageBoost))
+        byte var2 = 0;
+        
+        if (super.attackEntityAsMob(par1Entity))
         {
-            i += 3 << getActivePotionEffect(Potion.damageBoost).getAmplifier();
+            if (par1Entity instanceof EntityLiving)
+            {
+                if (this.worldObj.difficultySetting == 1)
+                {
+                    var2 = 1;
+                }
+                else if (this.worldObj.difficultySetting == 2)
+                {
+                    var2 = 2;
+                }
+                else if (this.worldObj.difficultySetting == 3)
+                {
+                    var2 = 4;
+                }
+            }
         }
-
-        if (isPotionActive(Potion.weakness))
+        else
         {
-            i -= 2 << getActivePotionEffect(Potion.weakness).getAmplifier();
+            return false;
         }
-
-        return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), i);
+        return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
     }
 
     /**

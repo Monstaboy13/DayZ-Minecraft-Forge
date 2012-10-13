@@ -30,7 +30,6 @@ public class EntityCrawler extends EntityAnimal
         super(par1World);
         texture = "/dayz/images/mob/crawler.png";
         moveSpeed = 0.2F;
-        attackStrength = 6;
         getNavigator().setBreakDoors(true);
         tasks.addTask(0, new EntityAISwimming(this));
         tasks.addTask(1, new AIBreakDoors(this));
@@ -156,25 +155,31 @@ public class EntityCrawler extends EntityAnimal
     @Override
     public boolean attackEntityAsMob(Entity par1Entity)
     {
-        int i = attackStrength;
-        int j = rand.nextInt(10);
-
-        if (isPotionActive(Potion.damageBoost))
-        {
-            i += 3 << getActivePotionEffect(Potion.damageBoost).getAmplifier();
-        }
-
-        if (isPotionActive(Potion.weakness))
-        {
-            i -= 2 << getActivePotionEffect(Potion.weakness).getAmplifier();
-        }
+        byte var2 = 0;
         
-        if (j == 0)
+        if (super.attackEntityAsMob(par1Entity))
         {
-        	((EntityLiving)par1Entity).addPotionEffect(new PotionEffect(Potion.poison.id, 120 * 20, 0));
+            if (par1Entity instanceof EntityLiving)
+            {
+                if (this.worldObj.difficultySetting == 1)
+                {
+                    var2 = 2;
+                }
+                else if (this.worldObj.difficultySetting == 2)
+                {
+                    var2 = 3;
+                }
+                else if (this.worldObj.difficultySetting == 3)
+                {
+                    var2 = 6;
+                }
+            }
         }
-
-        return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), i);
+        else
+        {
+            return false;
+        }
+        return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
     }
 
     /**
